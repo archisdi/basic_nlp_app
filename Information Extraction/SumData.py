@@ -3,7 +3,6 @@ import re
 file = tuple(open('Whatford vs Arsenal.txt','r'))
 
 recaps = []
-
 teams = []
 events = []
 
