@@ -1,8 +1,19 @@
 import re
 
-file = tuple(open('ManchesterVsWestham.txt','r'))
+file = tuple(open('Whatford vs Arsenal.txt','r'))
 
+recaps = []
+
+teams = []
 events = []
+
+def addteam(team):
+    if not(team in teams):
+        teams.append(team)
+
+def addevent(event):
+    if not(event in events):
+        events.append(event)
 
 for data in file:
     Filt = re.match(r"(\d+)'([a-z]+\s*[a-z]*\s*[a-z]*)", data)
@@ -11,13 +22,15 @@ for data in file:
         Filt = re.match(r"(\d+)'([a-z]+\s*[a-z]*\s*[a-z]*).*\((\w+)\)(.*)", data)
 
         if Filt:
-            print(Filt.group(2),'by',Filt.group(3),'on minutes',Filt.group(1))
+            addteam(Filt.group(3))
+            addevent(Filt.group(2))
+            recaps.append([Filt.group(3), Filt.group(2)])
         else:
-            Filt = re.match(r"(\d+)'([a-z]+\s*[a-z]*\s*[a-z]*).*\s([A-Z]\w+)", data)
+            Filt = re.match(r"(\d+)'([a-z]+\s*[a-z]*\s*[a-z]*).*,\s([A-Z]\w+)", data)
             if Filt:
-                print(Filt.group(2), 'by', Filt.group(3),'on minutes',Filt.group(1))
-            else:
-                print('x')
+                addteam(Filt.group(3))
+                addevent(Filt.group(2))
+                recaps.append([Filt.group(3), Filt.group(2)])
 
     else:
         Filt = re.match(r"(\d+)'\+\d'([a-z]+\s*[a-z]*\s*[a-z]*)", data)
@@ -25,12 +38,17 @@ for data in file:
             Filt = re.match(r"(\d+)'\+\d'([a-z]+\s*[a-z]*\s*[a-z]*).*\((\w+)\)(.*)", data)
 
             if Filt:
-                print(Filt.group(2), 'by', Filt.group(3), 'on minutes', Filt.group(1))
+                addteam(Filt.group(3))
+                addevent(Filt.group(2))
+                recaps.append([Filt.group(3), Filt.group(2)])
             else:
-                Filt = re.match(r"(\d+)'([a-z]+\s*[a-z]*\s*[a-z]*).*\s([A-Z]\w+)", data)
+                Filt = re.match(r"(\d+)'([a-z]+\s*[a-z]*\s*[a-z]*).*,\s([A-Z]\w+)", data)
                 if Filt:
-                    print(Filt.group(2), 'by', Filt.group(3), 'on minutes', Filt.group(1))
-                else:
-                    print('x')
-        else:
-            print('x')
+                    addteam(Filt.group(3))
+                    addevent(Filt.group(2))
+                    recaps.append([Filt.group(3), Filt.group(2)])
+
+for team in teams:
+    print('--------',team,'--------')
+    for event in events:
+        print(event,':',recaps.count([team,event]))
