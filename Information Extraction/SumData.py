@@ -1,6 +1,6 @@
 import re
 
-file = tuple(open('Whatford vs Arsenal.txt','r'))
+file = tuple(open('Chelsea vs Burnley.txt','r'))
 
 recaps = []
 teams = []
