@@ -1,0 +1,5 @@
+Recording the state     of a quantum register requires an exponential number of complex numbers (the 3-qubit register above requires  complex numbers). The number of classical bits required even to estimate the complex numbers of some quantum state grows exponentially with the number of qubits. For a 300-qubit quantum register, somewhere on the order of 1090 classical registers are required, more than there are atoms in the observable universe.
+<this is sparta>
+In our example, the 
+
+contents of the qubit registers can be thought of as an 8-dimensional complex vector. An algorithm for a quantum computer must initialize this vector in some specified form (dependent on the design of the quantum computer). In each step of the algorithm, that vector is modified by multiplying it by a unitary matrix. The matrix is determined by the physics of the device. The unitary character of the matrix ensures the matrix is invertible (so each step is reversible).
