@@ -1,5 +1,10 @@
 import re
 
+class driver:
+    def open(namaFile):
+        file = open(namaFile, 'r', encoding="utf8")
+        return (file.read()).lower()
+
 class cleaning:
 
     def parenth(data):
@@ -29,7 +34,6 @@ class normalization:
         splited = re.split("\.\s*", data)
 
         for par in splited:
-            par = par.lower()
             new_data.append("<s>" + par + "</s>")
 
         return new_data

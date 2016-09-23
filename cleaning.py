@@ -25,8 +25,9 @@ def cleaningPunctuation(text) :
 
 #driver
 # namaFile = 'wikipedia2text-extracted.txt'
-# isiFile = openFileTXT(namaFile)
-# print(isiFile)
+isiFile = openFileTXT(namaFile)
+print(isiFile)
+
 text = 'lalalla <script>\ += <jsjdhjsdjsgdjshg=_hjdejdhjw-> -(jshdjsjdjsh) 123 12.3333 43.33'
 print(cleaningScript(text))
 print(cleaningPenjelasan(text))
