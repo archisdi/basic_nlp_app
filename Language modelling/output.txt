@@ -1,6 +1,0 @@
-<s>recording the state of a quantum register requires an exponential number of complex numbers </s>
-<s>the number of classical bits required even to estimate the complex numbers of some quantum state grows exponentially with the number of qubits</s>
-<s>for a qubit quantum register somewhere on the order of classical registers are required more than there are atoms in the observable universe</s>
-<s>in our example the contents of the qubit registers can be thought of as an dimensional complex vector</s>
-<s>an algorithm for a quantum computer must initialize this vector in some specified form </s>
-<s></s>

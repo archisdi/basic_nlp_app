@@ -1,15 +1,37 @@
-from prepro import normalization as norm
-from prepro import  cleaning as cln
-from prepro import driver as drv
+from nlpack import main as mn
+from collections import Counter
 
-file_in   = drv.open('test.txt')
-file_out  = open('output.txt', 'w', encoding="utf8")
 
-data_in = file_in
+def unigram(inp, dataset):
+    inp = mn.spilt_word(inp)
+    split = mn.split_uni(dataset)
+    uni = Counter(split)
+    prob = 1.0
 
-new = (cln.whitesp(cln.punc(cln.digit(cln.parenth(cln.meta(data_in))))))
+    nWords = len(uni)
+    print("==================================================")
+    print("wi \t\t C(wi) \t #words \t P(wi)")
+    print("==================================================")
 
-new2 = norm.split_paragraph(new)
+    for data in inp:
+        print(data, '\t', uni[data], '\t', nWords, '\t', uni[data] / nWords)
+        prob = prob * uni[data] / nWords
 
-for data2 in new2:
-    file_out.write(data2 + "\n")
+    print("==================================================")
+    print("probability Unigrams :   ", prob)
+    print("Perplexity           :   ", mn.perplex_uni(inp, uni))
+
+
+dataset = open('data/trained.txt', 'r', encoding="utf8").read()
+
+print("1.Unigram")
+print("2.Bigram")
+sel = input('Pilih : ')
+
+if (sel == '1'):
+    inp = input('Masukkan kalimat : ')
+    unigram(inp, dataset)
+elif (sel == '2'):
+    print("underconstruction")
+else:
+    print("error")
