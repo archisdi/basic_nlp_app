@@ -30,7 +30,7 @@ class normalization:
         for par in splited:
             par = par.lower()
             if (par != ''):
-                new_data.append("<s>" + par + "</s>")
+                new_data.append("<s> " + par + " </s>")
 
         return new_data
 
