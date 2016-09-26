@@ -5,6 +5,7 @@ class cleaning:
         new_data = re.sub(r'\([^)]*\)', '', data)
         return new_data
 
+
     def meta(data):
         new_data = re.sub(r'<[^>]*>', '', data)
         return new_data
