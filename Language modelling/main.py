@@ -1,6 +1,7 @@
 from nlpack import main as mn
 from collections import Counter
 import texttable as tt
+from tabulate import tabulate
 
 tab = tt.Texttable()
 
@@ -9,35 +10,32 @@ def unigram(inp, dataset):
     split = mn.split_uni(dataset)
     uni = Counter(split)
     prob = 1.0
-    dataShow = [[]]
+    dataShow = []
     nWords = len(uni)
     for i in range(1,len(inp)):
         dataShow.append([inp[i], uni[inp[i]], nWords, uni[inp[i]] / nWords])
         prob = prob * uni[inp[i]] / nWords
-        # prob = prob * ()
-    tab.add_rows(dataShow)
-    tab.set_cols_align(['r','r','r','r'])
+    print(tabulate(dataShow, headers=['wi','C(wi)','#words','P(wi)'],tablefmt="grid"))
     tab.header(['wi','C(wi)','#words','P(wi)'])
-    print(tab.draw())
     print("probability Unigrams :   ", prob)
     print("Perplexity           :   ", mn.perplex_uni(inp, uni))
 
 def bigram(inp,dataset) :
     inp = mn.spilt_word(inp)
-    data = [[]]
+    split = mn.split_uni(dataset)
+    count = Counter(split)
+    nDict = len(count)
+    data = []
     prob = 1
     perplex = 1
     for i in range(len(inp)-1) :
         x = dataset.count(inp[i]+' '+inp[i+1])
         y = dataset.count(inp[i])
-        z = x/y
+        z = (x+1)/(y+nDict)
         data.append([inp[i],inp[i+1],x, y ,z])
         prob = prob * z
-        # perplex = perplex * (1/z) #aktifkan kalo smoothing udah bisa
-    tab.add_rows(data)
-    tab.set_cols_align(['r','r','r','r','r'])
-    tab.header(['wi','wi+1','Ci,i+1','C(i)','P(wi+1|wi)'])
-    print(tab.draw())
+        perplex = perplex * (1/z) #aktifkan kalo smoothing udah bisa
+    print(tabulate(data, headers=['wi','wi+1','Ci,i+1','C(i)','P(wi+1|wi)'],tablefmt="grid"))
     print("probability Unigrams :   ", prob)
     print("Perplexity           :   ", pow(perplex,1/len(inp)))
 
