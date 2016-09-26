@@ -27,6 +27,7 @@ def bigram(inp,dataset) :
     data = [[]]
     prob = 1
     perplex = 1
+
     for i in range(len(inp)-1) :
         x = dataset.count(inp[i]+' '+inp[i+1])
         y = dataset.count(inp[i])
@@ -34,6 +35,7 @@ def bigram(inp,dataset) :
         data.append([inp[i],inp[i+1],x, y ,z])
         prob = prob * z
         # perplex = perplex * (1/z) #aktifkan kalo smoothing udah bisa
+
     tab.add_rows(data)
     tab.set_cols_align(['r','r','r','r','r'])
     tab.header(['wi','wi+1','Ci,i+1','C(i)','P(wi+1|wi)'])
