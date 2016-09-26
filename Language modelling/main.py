@@ -8,17 +8,22 @@ tab = tt.Texttable()
 def unigram(inp, dataset):
     inp = mn.spilt_word(inp)
     split = mn.split_uni(dataset)
+    token = len(split)
     uni = Counter(split)
     prob = 1.0
     dataShow = []
+    perplex = 1.0
     nWords = len(uni)
     for i in range(1,len(inp)):
-        dataShow.append([inp[i], uni[inp[i]], nWords, uni[inp[i]] / nWords])
-        prob = prob * uni[inp[i]] / nWords
+        z = (uni[inp[i]]+1) / (token+nWords)
+        dataShow.append([inp[i], uni[inp[i]], token, z])
+        prob = prob * z
+        perplex = perplex * (1/z)
+
     print(tabulate(dataShow, headers=['wi','C(wi)','#words','P(wi)'],tablefmt="grid"))
     tab.header(['wi','C(wi)','#words','P(wi)'])
     print("probability Unigrams :   ", prob)
-    print("Perplexity           :   ", mn.perplex_uni(inp, uni))
+    print("Perplexity           :   ",pow(perplex,1/len(inp)))
 
 def bigram(inp,dataset) :
     inp = mn.spilt_word(inp)
@@ -34,7 +39,7 @@ def bigram(inp,dataset) :
         z = (x+1)/(y+nDict)
         data.append([inp[i],inp[i+1],x, y ,z])
         prob = prob * z
-        perplex = perplex * (1/z) #aktifkan kalo smoothing udah bisa
+        perplex = perplex * (1/z)
     print(tabulate(data, headers=['wi','wi+1','Ci,i+1','C(i)','P(wi+1|wi)'],tablefmt="grid"))
     print("probability Unigrams :   ", prob)
     print("Perplexity           :   ", pow(perplex,1/len(inp)))

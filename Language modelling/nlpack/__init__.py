@@ -43,15 +43,3 @@ class main:
 
     def split_bi(self):
         return re.findall(r'\w+\s\w+', self)
-
-    def perplex_uni(inp,unigram):
-        perplexity = 1
-        N = 0
-
-        for word in inp:
-            if word in unigram:
-                N += 1
-                perplexity = perplexity * (1 / unigram[word])
-        perplexity = pow(perplexity, 1 / float(N))
-
-        return perplexity
