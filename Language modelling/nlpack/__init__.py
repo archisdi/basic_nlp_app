@@ -39,7 +39,7 @@ class main:
         return self.split()
 
     def split_uni(self):
-        return re.findall(r'\w+',self)
+        return re.split('\s',self)
 
     def split_bi(self):
         return re.findall(r'\w+\s\w+', self)
