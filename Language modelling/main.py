@@ -11,9 +11,9 @@ def unigram(inp, dataset):
     prob = 1.0
     dataShow = [[]]
     nWords = len(uni)
-    for data in inp:
-        dataShow.append([data, uni[data], nWords, uni[data] / nWords])
-        prob = prob * uni[data] / nWords
+    for i in range(1,len(inp)):
+        dataShow.append([inp[i], uni[inp[i]], nWords, uni[inp[i]] / nWords])
+        prob = prob * uni[inp[i]] / nWords
         # prob = prob * ()
     tab.add_rows(dataShow)
     tab.set_cols_align(['r','r','r','r'])
